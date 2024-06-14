@@ -4,13 +4,18 @@ abstract class Archetype {
   static countArchetypeInstances = 0;
 
   private _name: string;
-  private _special = 0;
-  private _cost = 0;
-
-  constructor(name: string, special:number, cost:number) {
+  private _special: number;
+  private _cost: number;
+  
+  constructor(
+    name: string,
+    special = 0,
+    cost = 0,
+  ) {
     this._name = name;
     this._special = special;
     this._cost = cost;
+    Archetype.countArchetypeInstances += 1;
   }
 
   get name(): string {
