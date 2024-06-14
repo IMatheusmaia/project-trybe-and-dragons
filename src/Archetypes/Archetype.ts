@@ -1,11 +1,11 @@
 import { EnergyType } from '../Energy';
 
 abstract class Archetype {
-  static countArchetypeInstances = 0;
-
   private _name: string;
   private _special: number;
   private _cost: number;
+
+  static countInstances = 0;
   
   constructor(
     name: string,
@@ -15,7 +15,6 @@ abstract class Archetype {
     this._name = name;
     this._special = special;
     this._cost = cost;
-    Archetype.countArchetypeInstances += 1;
   }
 
   get name(): string {
@@ -31,7 +30,12 @@ abstract class Archetype {
   }
 
   static createdArchetypeInstances(): number {
-    throw new Error('Not implemented!');
+    Archetype.countInstances += 1;
+    
+    if (Archetype.countInstances === 0) {
+      throw new Error('Not implemented!');
+    }
+    return Archetype.countInstances;
   }
 
   abstract get energyType(): EnergyType;
